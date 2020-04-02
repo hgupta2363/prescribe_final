@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import Grid from '@material-ui/core/Grid';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
@@ -112,7 +113,16 @@ import { getDefaultNormalizer } from '@testing-library/react';
           console.log(NewUser)
         axios.post('http://localhost:5000/patientDetail',NewUser).then(res=>{
           if(res.data.status)
-         window.location="/Payment_Gateway/"+res.data.PatientId+'/'+res.data.HosName;
+          {
+            
+            setTimeout(()=>{
+              window.location="/zoom_call_token/"+res.data.PatientId;
+              
+            },4000)
+            // 
+            
+          }
+         
           console.log(res.data.status)
         })
        

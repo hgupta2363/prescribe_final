@@ -11,21 +11,15 @@ import axios from 'axios';
 export default class Zoomcall extends Component{
   state={
      Name:'',
-  }
-  componentDidMount()
-  {   
-      var id=window.location.pathname.split('/')[2]
-      axios.get('http://localhost:5000/final/'+id).then(res=>{
-            this.setState({
-                Name:res.data.docName.replace(/%20/g, " "),
-                HospName:res.data.HospitalName.replace(/%20/g, " "),
-                DocName:res.data.docName.replace(/%20/g, " "),
-                Slot:res.data.Slot.replace(/%20/g, " "),
-                Pname:res.data.name.replace(/%20/g, " ")
+     HospName:'',
+     DocName:'',
+     Slot:'',
+     Pname:''
 
-              })
-        })
+
+
   }
+  
   render()
   {
     return (
@@ -49,9 +43,10 @@ export default class Zoomcall extends Component{
           />
         </Grid>
         <Grid item xs={12} class="zoom-para">
-        Dear <b>{this.state.Pname}</b> your appointment has been confirmed at <b>{this.state.HospName}</b> hospital with Doc <b>{this.state.docName}</b> at <b>{this.state.Slot}</b> hours. "
+        Dear <b>shubham choudhary</b> your appointment has been confirmed at <b>NIZAR</b> hospital with Doc <b>J.SIVA</b> at <b>9:00 to 12:00</b> hours. "
         Please install Zoom app using the below link for video consulting with your Doctor.
         <link/>
+        Your Token Number is: <b> 8 </b><br></br>
         Requesting you to follow the live status through whats-app by typing "STATUS"
         Kindly note that the doctor's availability and token order may vary to handle emergency cases.
         We will alert you once the Doctor is ready

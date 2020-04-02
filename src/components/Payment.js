@@ -12,9 +12,11 @@ import axios from 'axios'
     onSubmit(e)
     {
         e.preventDefault()
-        var id=window.location.pathname.split('/')[3]
+        var id=window.location.pathname.split('/')[2]
+        console.log(id)
         axios.get('http://localhost:5000/final/'+id).then(res=>{
-            window.location='/zoom_call_token/'+res.data.HospitalName
+            window.location='/zoom_call_token/'+res.data.pid
+     
         })
     }
   render()

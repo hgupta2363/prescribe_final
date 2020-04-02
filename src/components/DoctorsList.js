@@ -17,6 +17,7 @@ class DoctorsList extends Component{
                     doctors:res.data
                 })
         })
+        console.log(this.state.doctors)
     }
     render()
     {

@@ -30,7 +30,7 @@ class DoctorsList extends Component{
                 {
                     this.state.doctors.map((value,index)=>{
                         return (
-                            <Link to={'/PatientDets/'+value.doctorId+'/'+value.doctor+'/'+value.slot} className="link"> 
+                            <Link to={'/PatientDets/'+value.doctorId+'/'+value.doctor+'/'+value.slot+'/'+value.fee} className="link"> 
                            
                            <Card style={{ width: '18rem' }}>
                                

@@ -19,8 +19,8 @@ function MainRoutes()
                 <Route path='/SignUp' component={Register}/>
                 <Route path='/Profile/:id' component={Profile}/>
                 <Route path='/DocList' component={DoctorsList}/>
-                <Route path='/PatientDets/:id/:name/:slot' component={PatientDetail}/>
-               
+                <Route path='/PatientDets/:id/:name/:slot/:fee' component={PatientDetail}/>
+                <Route path='/payment' component={ZoomCall}/>
                 <Route path='/zoom_call_token/:name' component={ZoomCall}/>
         </Router>
     )

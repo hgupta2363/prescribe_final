@@ -53,9 +53,7 @@ import { getDefaultNormalizer } from '@testing-library/react';
     }
     onChangeLName(e)
     {
-        this.setState({
-            lName:e.target.value
-        })
+        this.setState({lName:e.target.value})
     }
  
     onChangeSex(e)
@@ -114,13 +112,9 @@ import { getDefaultNormalizer } from '@testing-library/react';
         axios.post('http://localhost:5000/patientDetail',NewUser).then(res=>{
           if(res.data.status)
           {
-            
-            setTimeout(()=>{
-              window.location="/zoom_call_token/"+res.data.PatientId;
-              
-            },4000)
-            // 
-            
+            axios.get('http://localhost:8080/payment/'+id[5]).then(res=>{
+              console.log(res.data)
+            })
           }
          
           console.log(res.data.status)
@@ -192,11 +186,11 @@ import { getDefaultNormalizer } from '@testing-library/react';
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="zip"
-            name="zip"
+            id=""
+            name=""
             label="Age"
             fullWidth
-            autoComplete="billing postal-code"
+            autoComplete=""
             value={this.state.age}
             onChange={this.onChangeAge}
           />
@@ -207,7 +201,7 @@ import { getDefaultNormalizer } from '@testing-library/react';
             type="email"
             label="Email"
             fullWidth
-            autoComplete="billing country"
+            autoComplete=""
             value={this.state.email}
             onChange={this.onChangeEmail}
           />

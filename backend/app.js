@@ -80,7 +80,7 @@ app.post('/callback',(req,res,next)=>{
     request('https://'+key_id+':'+key_secret+'@api.razorpay.com/v1/payments/'+req.body.razorpay_payment_id, function (error, response, body) {
  console.log(body)
     data=body
-res.redirect("https://sad-beaver-3a50ee.netlify.com/payment_status")
+res.redirect("https://hgupta2363.github.io/prescrie_deploy/payment_status")
 });
 })
 app.post('/patientDetail',(req,res,next)=>{

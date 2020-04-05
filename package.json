@@ -36,8 +36,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "heroku-postbuild": "npm run build",
-    "deploy": "aws s3 sync build/ s3://prescribe-web-app --acl public-read"
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"

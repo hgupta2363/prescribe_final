@@ -1,5 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router,Route} from "react-router-dom";
+import {BrowserRouter as Router,Route,hashHistory} from "react-router-dom";
 import Register from './Register';
 import Navbar from './Navbar'
 import "bootstrap/dist/css/bootstrap.min.css"
@@ -13,7 +13,7 @@ import Payment from './Payment'
 function MainRoutes()
 {
     return(
-        <Router>
+        <Router history={hashHistory}>
             <Navbar/>
                 <Route path='/Home' component={Register}/>
                 <Route path='/Login' component={Login}/>

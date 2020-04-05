@@ -115,11 +115,11 @@ import { getDefaultNormalizer } from '@testing-library/react';
             Slot:Slot
           }
           console.log(NewUser)
-        axios.post('http://localhost:5000/patientDetail',NewUser).then(res=>{
+        axios.post('https://hgupta2363-prescribe-test.glitch.me/patientDetail',NewUser).then(res=>{
           console.log(res.data)
           if(res.data.status)
           {
-            window.location='http://localhost:5000/payment/'+name+','+phone+','+email+','+docName+','+id[5]
+            window.location='https://hgupta2363-prescribe-test.glitch.me/payment/'+name+','+phone+','+email+','+docName+','+id[5]
             
           }
          

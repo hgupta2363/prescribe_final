@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/prescrie_deploy/static/css/main.29f007aa.chunk.css",
+    "main.js": "/prescrie_deploy/static/js/main.7bf3bf5c.chunk.js",
+    "main.js.map": "/prescrie_deploy/static/js/main.7bf3bf5c.chunk.js.map",
+    "runtime-main.js": "/prescrie_deploy/static/js/runtime-main.ee5cd5ce.js",
+    "runtime-main.js.map": "/prescrie_deploy/static/js/runtime-main.ee5cd5ce.js.map",
+    "static/css/2.de424728.chunk.css": "/prescrie_deploy/static/css/2.de424728.chunk.css",
+    "static/js/2.4b50f45f.chunk.js": "/prescrie_deploy/static/js/2.4b50f45f.chunk.js",
+    "static/js/2.4b50f45f.chunk.js.map": "/prescrie_deploy/static/js/2.4b50f45f.chunk.js.map",
+    "index.html": "/prescrie_deploy/index.html",
+    "precache-manifest.fc916fc0a5f6d0da0f2f006c9a1bbc2e.js": "/prescrie_deploy/precache-manifest.fc916fc0a5f6d0da0f2f006c9a1bbc2e.js",
+    "service-worker.js": "/prescrie_deploy/service-worker.js",
+    "static/css/2.de424728.chunk.css.map": "/prescrie_deploy/static/css/2.de424728.chunk.css.map",
+    "static/css/main.29f007aa.chunk.css.map": "/prescrie_deploy/static/css/main.29f007aa.chunk.css.map",
+    "static/js/2.4b50f45f.chunk.js.LICENSE.txt": "/prescrie_deploy/static/js/2.4b50f45f.chunk.js.LICENSE.txt",
+    "static/media/navbar.css": "/prescrie_deploy/static/media/subscribe-bg.32590a11.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ee5cd5ce.js",
+    "static/css/2.de424728.chunk.css",
+    "static/js/2.4b50f45f.chunk.js",
+    "static/css/main.29f007aa.chunk.css",
+    "static/js/main.7bf3bf5c.chunk.js"
+  ]
+}

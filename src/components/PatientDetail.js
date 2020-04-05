@@ -96,7 +96,13 @@ import { getDefaultNormalizer } from '@testing-library/react';
     {
         e.preventDefault();
         var id=window.location.pathname.split('/')
-        console.log(id)
+        const docId=id[2].replace(/%20/g, '')
+        const docName=id[3].replace(/%20/g, '')
+        const Slot=id[4].replace(/%20/g, '')
+        const email=this.state.email
+        const phone =this.state.phone
+        const name=this.state.fName+this.state.lName
+        console.log(docId)
         const NewUser={
             name:`${this.state.fName} `+`${this.state.lName}`,
             age:this.state.age,
@@ -104,17 +110,17 @@ import { getDefaultNormalizer } from '@testing-library/react';
             email:this.state.email,
             phone:this.state.phone,
             address:this.state.address,
-            docId:id[2],
-            docName:id[3],
-            Slot:id[4]
+            docId:docId,
+            docName:docName,
+            Slot:Slot
           }
           console.log(NewUser)
         axios.post('http://localhost:5000/patientDetail',NewUser).then(res=>{
+          console.log(res.data)
           if(res.data.status)
           {
-            axios.get('http://localhost:8080/payment/'+id[5]).then(res=>{
-              console.log(res.data)
-            })
+            window.location='http://localhost:5000/payment/'+name+','+phone+','+email+','+docName+','+id[5]
+            
           }
          
           console.log(res.data.status)

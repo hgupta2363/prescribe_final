@@ -8,6 +8,7 @@ import Profile from './Profile'
 import DoctorsList from './DoctorsList'
 import PatientDetail from './PatientDetail'
 import ZoomCall from './ZoomCall'
+import Payment from './Payment'
 
 function MainRoutes()
 {
@@ -20,7 +21,7 @@ function MainRoutes()
                 <Route path='/Profile/:id' component={Profile}/>
                 <Route path='/DocList' component={DoctorsList}/>
                 <Route path='/PatientDets/:id/:name/:slot/:fee' component={PatientDetail}/>
-                <Route path='/payment' component={ZoomCall}/>
+                <Route path='/payment_status' component={Payment}/>
                 <Route path='/zoom_call_token/:name' component={ZoomCall}/>
         </Router>
     )

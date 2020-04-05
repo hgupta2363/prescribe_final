@@ -1,24 +1,38 @@
 var app=require('express')()
 const cors=require('cors')
 const bodyParser=require('body-parser');
-port=5000;
+const ejs=require("ejs")
+const path=require("path")
+const Razorpay=require("razorpay")
+const url=require("url")
+const request=require("request")
+port=process.env.PORT || 5000;
 var firebase = require("firebase");
+require('dotenv').config();
+
+const key_id=process.env.KEY_ID
+const key_secret=process.env.KEY_SECRET
+var data={}
 app.use(cors());
 var dets=[]
 // var serviceAccount = require('C:/Users/chdno/Desktop/All desktop Files/PresAssignment/my-app/backend/prescribetask-firebase-adminsdk-jh3c7-d97cd99717.json');
-app.use(bodyParser.json());
+
 // admin.initializeApp({
 //   credential: admin.credential.cert(serviceAccount),
 //   databaseURL: "https://speech-f3243.firebaseio.com/"
 // });
+app.use(bodyParser.json());
+
+//support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
 const config = {
-    apiKey: "AIzaSyDrB03c-kX6zU64_joKByPxOw09a6p4kPU",
+    apiKey: process.env.API_KEY_FIREBASE,
     authDomain: "speech-f3243.firebaseapp.com",
     databaseURL: "https://speech-f3243.firebaseio.com",
     projectId: "speech-f3243",
     storageBucket: "speech-f3243.appspot.com",
     messagingSenderId: "26831214028",
-    appId: "1:26831214028:web:422e25a6b7384009"
+    appId: process.env.API_ID
   };
   firebase.initializeApp(config);
 
@@ -28,7 +42,10 @@ const config = {
 
 
 
-
+  var instance = new Razorpay({
+    key_id: process.env.KEY_ID,
+    key_secret:process.env.KEY_SECRET
+  })
 
 // var expressSession=require('express-session')
 // app.use(expressSession({secret:'max',saveUninitialised:false,re save:false}))
@@ -37,7 +54,37 @@ const config = {
 //       res.send(snap.val())
 //     })
 // })
+app.get('/payment_status',(req,res,next)=>{
+    res.send(data)
+})
+app.get('/payment/:id1',(req,res)=>{
+    console.log("test")
+    const data=req.params.id1.split(',')
+    console.log(data)
+    var options = {
+        amount: Number(data[6])*100,  // amount in the smallest currency unit
+        currency: "INR",
+        receipt: "rcptid_17",
+        payment_capture: '0'
+        
+      };
+      instance.orders.create(options, function(err, order) {
+          console.log(order)
+         res.render("respose.ejs",{id:order.id,data:data})
+         res.end()
+      });
+})
+app.post('/callback',(req,res,next)=>{
+    console.log("test")
+    console.log(req.body)
+    request('https://'+key_id+':'+key_secret+'@api.razorpay.com/v1/payments/'+req.body.razorpay_payment_id, function (error, response, body) {
+ console.log(body)
+    data=body
+res.redirect("https://sad-beaver-3a50ee.netlify.com/payment_status")
+});
+})
 app.post('/patientDetail',(req,res,next)=>{
+    console.log(req.body )
     const user_id=database.ref('/patients_data').push().key
     const HospitalName="NIZAR";
     database.ref('/patients_data/NIZAR').child(user_id).set({
@@ -53,7 +100,7 @@ app.post('/patientDetail',(req,res,next)=>{
         docName:req.body.docName,
         Slot:req.body.Slot
     })
-    console.log(user_id )
+    
     res.send({status:true,PatientId:user_id,HosName:HospitalName})
 })
 app.get('/final/:name',(req,res,next)=>{
@@ -117,8 +164,8 @@ app.post('/newUser',(req,res,next)=>{
         }
     })
 })
-app.post('/callback',(req,res)=>{
-    console.log(res.data)
+app.get("/",(req,res)=>{
+    response.send("test")
 })
 app.post('/Login',(req,res,next)=>{
     const checkData={
@@ -172,55 +219,6 @@ app.listen(port,()=>{
 process.on('uncaughtException', function (err) {
     console.log(err);
 }); 
-const app2=require('express')()
-const qs = require('querystring');
-const port2 = 8080;
-const checksum_lib = require('./checksum');
-app2.use(cors())
-var PaytmConfig = {
-	mid: "ZsRjKz00302905208941",
-	key: "Mjxm!FeB6xU!EO4J",
-    website: "WEBSTAGING",
-    TXN_AMOUNT:''
-}
-app2.listen(port2,()=>{
-    console.log('Payment Server Runnin')
-})
-app2.get('/payment/:id',(req,res)=>{
-    const PayAmount=req.params.id;
-    res.redirect('/finalPay/'+PayAmount);
-})
-app2.get('/final/:id',(req,res)=>{
-   PaytmConfig.TXN_AMOUNT=req.params.id;
-    
-    var params 						= {};
-        params['MID'] 				= PaytmConfig.mid;
-        params['WEBSITE']			= PaytmConfig.website;
-        params['CHANNEL_ID']		= 'WEB';
-        params['INDUSTRY_TYPE_ID']	= 'Retail';
-        params['ORDER_ID']			= 'TEST_'  + new Date().getTime();
-        params['CUST_ID'] 			= 'Customer001';
-        params['TXN_AMOUNT']		=  `${PaytmConfig.TXN_AMOUNT}`;
-        params['CALLBACK_URL']		= 'http://localhost:5000/callback';
-        params['EMAIL']				= 'abc@mailinator.com';
-        params['MOBILE_NO']			= '7777777777';
-
-        checksum_lib.genchecksum(params, PaytmConfig.key, function (err, checksum) {
-
-            var txn_url = "https://securegw-stage.paytm.in/theia/processTransaction"; // for staging
-            // var txn_url = "https://securegw.paytm.in/theia/processTransaction"; // for production
-            
-            var form_fields = "";
-            for(var x in params){
-                form_fields += "<input type='hidden' name='"+x+"' value='"+params[x]+"' >";
-            }
-            form_fields += "<input type='hidden' name='CHECKSUMHASH' value='"+checksum+"' >";
-
-            res.writeHead(200, {'Content-Type': 'text/html'});
-            res.write('<html><head><title>Merchant Checkout Page</title></head><body><center><h1>Please do not refresh this page...</h1></center><form method="post" action="'+txn_url+'" name="f1">'+form_fields+'</form><script type="text/javascript">document.f1.submit();</script></body></html>');
-            res.end();
-        });
-    })
 
 
 // http.createServer(function (req, res) {

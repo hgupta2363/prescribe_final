@@ -15,7 +15,7 @@ import axios from 'axios'
    
     componentDidMount()
     {
-        axios.get('http://localhost:5000/payment_status').then(res=>{
+        axios.get('https://hgupta2363-prescribe-test.glitch.me/payment_status').then(res=>{
                 this.setState({payment_data:res.data})
         })
         

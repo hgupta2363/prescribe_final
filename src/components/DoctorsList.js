@@ -12,7 +12,7 @@ class DoctorsList extends Component{
     }
     componentDidMount()
     {
-        axios.get('http://localhost:5000/getData').then(res=>{
+        axios.get('https://hgupta2363-prescribe-test.glitch.me/getData').then(res=>{
                 this.setState({
                     doctors:res.data
                 })

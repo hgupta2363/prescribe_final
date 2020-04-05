@@ -14,20 +14,17 @@ function MainRoutes() {
   return (
     <Router>
       <Navbar />
-      <Route path="/prescrie_deploy/Home" component={Register} />
-      <Route path="/prescrie_deploy/Login" component={Login} />
-      <Route path="/prescrie_deploy/SignUp" component={Register} />
-      <Route path="/prescrie_deploy/Profile/:id" component={Profile} />
-      <Route path="/prescrie_deploy/DocList" component={DoctorsList} />
+      <Route path="/Home" component={Register} />
+      <Route path="/Login" component={Login} />
+      <Route path="/SignUp" component={Register} />
+      <Route path="/Profile/:id" component={Profile} />
+      <Route path="/DocList" component={DoctorsList} />
       <Route
-        path="/prescrie_deploy/PatientDets/:id/:name/:slot/:fee"
+        path="/PatientDets/:id/:name/:slot/:fee"
         component={PatientDetail}
       />
-      <Route path="/prescrie_deploy/payment_status" component={Payment} />
-      <Route
-        path="/prescrie_deploy/zoom_call_token/:name"
-        component={ZoomCall}
-      />
+      <Route path="/payment_status" component={Payment} />
+      <Route path="/zoom_call_token/:name" component={ZoomCall} />
     </Router>
   );
 }

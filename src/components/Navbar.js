@@ -37,7 +37,7 @@ export default class Navbar extends Component {
                 </Link>
               </li>
               <li className="">
-                <Link to="/prescrie_deploy/DocList" className="a">
+                <Link to="/DocList" className="a">
                   Doctors List
                 </Link>
               </li>

@@ -30,7 +30,7 @@ export default class Zoomcall extends Component{
       console.log(values.code)
       const token = Buffer.from(`${this.state.ClientId}:${this.state.ClientKey}`, 'utf8').toString('base64')
       console.log(token)
-      axios.get(`http://https://hgupta2363-prescribe-test.glitch.me/Zoom_token/${values.code}/${token}`).then(res=>{
+      axios.get(`https://hgupta2363-prescribe-test.glitch.me/Zoom_token/${values.code}/${token}`).then(res=>{
         if(res.data)
         {
           this.setState({

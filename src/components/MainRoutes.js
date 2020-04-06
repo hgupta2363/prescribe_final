@@ -9,7 +9,7 @@ import DoctorsList from "./DoctorsList";
 import PatientDetail from "./PatientDetail";
 import ZoomCall from "./ZoomCall";
 import Payment from "./Payment";
-
+import ConfirmBooking from './ConfirmBooking'
 function MainRoutes() {
   return (
     <Router>
@@ -25,6 +25,7 @@ function MainRoutes() {
       />
       <Route path="/payment_status" component={Payment} />
       <Route path='/zoom_token' component={ZoomCall}/>
+      <Route path='/Meeting_Booked/:pid/:fee' component={ConfirmBooking}/>
     </Router>
   );
 }

@@ -20,11 +20,16 @@ import axios from 'axios'
         })
         
     }
+    handleClick()
+{
+   window.location="https://zoom.us/oauth/authorize?response_type=code&client_id=bMuzuK72TOigchDSFxqNRA&redirect_uri=https://presribereact.herokuapp.com/zoom_token"
+}
   render()
   
   {
 console.log(this.state.payment_data)
-  
+
+
     return (
       <div class="receipt">
   
@@ -75,7 +80,7 @@ console.log(this.state.payment_data)
         
           </tbody>
       </table>
-      <button class="button">arrange zoom meeting</button>
+      <button class="button" onClick={this.handleClick}>arrange zoom meeting</button>
   </div>
   );
 }

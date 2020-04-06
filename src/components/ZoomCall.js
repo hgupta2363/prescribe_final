@@ -7,6 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import './css/Zoom.css'
 import {Link} from "react-router-dom";
 import axios from 'axios';
+import queryString from 'query-string'
 
 export default class Zoomcall extends Component{
   state={
@@ -14,12 +15,32 @@ export default class Zoomcall extends Component{
      HospName:'',
      DocName:'',
      Slot:'',
-     Pname:''
-
-
-
+     Pname:'',
+     ClientId:'bMuzuK72TOigchDSFxqNRA',
+     ClientKey:'mYdUhLKE3CI22eRCsmgcl2NyuG4GZjPU',
+     token:'',
+     Url:'',
+     Pid:''
+    }
+  componentDidMount()
+  {   const { location: { search } } = this.props;
+      const values = queryString.parse(search);
+      console.log(values.code)
+      const token = Buffer.from(`${this.state.ClientId}:${this.state.ClientKey}`, 'utf8').toString('base64')
+      console.log(token)
+      axios.get(`http://https://hgupta2363-prescribe-test.glitch.me/Zoom_token/${values.code}/${token}`).then(res=>{
+        this.setState({
+             Url:res.data.join_url,
+             Pid:localStorage.getItem('pid'),
+              fee:localStorage.getItem('fee')
+        })
+      })
+      console.log(this.state.Pid)
+      axios.get(`http://localhost:5000/GetDets/${this.state.Pid}`).then(res=>{
+       console.log(res.data)
+      })
+      
   }
-  
   render()
   {
     return (
@@ -39,7 +60,7 @@ export default class Zoomcall extends Component{
             label="CVV"
             helperText="Last three digits on signature strip"
             fullWidth
-            value="7lstjK9NTyett_oeXtFiEQ&redirect_uri=https://yourapp.com"
+            value={this.state.Url}
           />
         </Grid>
         <Grid item xs={12} class="zoom-para">

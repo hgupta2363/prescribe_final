@@ -24,7 +24,7 @@ function MainRoutes() {
         component={PatientDetail}
       />
       <Route path="/payment_status" component={Payment} />
-      <Route path="/zoom_call_token/:name" component={ZoomCall} />
+      <Route path='/zoom_token' component={ZoomCall}/>
     </Router>
   );
 }
